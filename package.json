@@ -7,13 +7,13 @@
     "backend"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "dev": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"cyan,magenta\" \"npm run dev -w frontend\" \"npm run dev -w backend\"",
     "dev:frontend": "npm run dev -w frontend",
     "dev:backend": "npm run dev -w backend",
     "build": "npm run build -w frontend && npm run build -w backend",
     "build:frontend": "npm run build -w frontend",
     "build:backend": "npm run build -w backend",
-    "start": "concurrently \"npm run preview -w frontend\" \"npm run start -w backend\"",
+    "start": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"cyan,magenta\" \"npm run preview -w frontend\" \"npm run start -w backend\"",
     "lint": "npm run lint -w frontend",
     "format": "npm run format -w frontend",
     "format:check": "npm run format:check -w frontend"
