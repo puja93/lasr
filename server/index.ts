@@ -1,12 +1,20 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 import { AccessToken, type AccessTokenOptions, type VideoGrant } from 'livekit-server-sdk';
 import { RoomConfiguration } from '@livekit/protocol';
 
+// Get the directory of this file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const rootDir = join(__dirname, '..');
+
 // Load environment variables from .env.local (or .env if .env.local doesn't exist)
-dotenv.config({ path: '.env.local' });
-dotenv.config(); // Fallback to .env if .env.local doesn't exist
+// Use absolute paths to ensure they load regardless of where the process is started
+dotenv.config({ path: join(rootDir, '.env.local') });
+dotenv.config({ path: join(rootDir, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;

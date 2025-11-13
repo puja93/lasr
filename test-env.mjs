@@ -22,14 +22,15 @@ console.log();
 // Load environment variables the same way the server does
 console.log('🔄 Loading environment variables...\n');
 
-const resultLocal = dotenv.config({ path: '.env.local' });
+// Use absolute paths
+const resultLocal = dotenv.config({ path: envLocalPath });
 if (resultLocal.error) {
   console.log('  ⚠️  .env.local not loaded:', resultLocal.error.message);
 } else {
   console.log('  ✅ .env.local loaded successfully');
 }
 
-const resultEnv = dotenv.config();
+const resultEnv = dotenv.config({ path: envPath });
 if (resultEnv.error) {
   console.log('  ⚠️  .env not loaded:', resultEnv.error.message);
 } else {
