@@ -9,7 +9,7 @@ import { RoomConfiguration } from '@livekit/protocol';
 // Get the directory of this file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const rootDir = join(__dirname, '..');
+const rootDir = join(__dirname, '../..');  // Go up two levels to reach repository root
 
 // Load environment variables from .env.local (or .env if .env.local doesn't exist)
 // Use absolute paths to ensure they load regardless of where the process is started
@@ -27,6 +27,12 @@ app.use(express.json());
 const API_KEY = process.env.LIVEKIT_API_KEY;
 const API_SECRET = process.env.LIVEKIT_API_SECRET;
 const LIVEKIT_URL = process.env.LIVEKIT_URL;
+
+// Log environment variable status on startup
+console.log('🔐 Environment variables loaded:');
+console.log(`  LIVEKIT_URL: ${LIVEKIT_URL ? '✅ Set' : '❌ Missing'}`);
+console.log(`  LIVEKIT_API_KEY: ${API_KEY ? '✅ Set' : '❌ Missing'}`);
+console.log(`  LIVEKIT_API_SECRET: ${API_SECRET ? '✅ Set (***' + API_SECRET?.slice(-4) + ')' : '❌ Missing'}`);
 
 type ConnectionDetails = {
   serverUrl: string;
