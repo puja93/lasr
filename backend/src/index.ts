@@ -9,12 +9,12 @@ import { RoomConfiguration } from '@livekit/protocol';
 // Get the directory of this file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const rootDir = join(__dirname, '../..');  // Go up two levels to reach repository root
+const backendDir = join(__dirname, '..');  // Backend workspace directory
 
-// Load environment variables from .env.local (or .env if .env.local doesn't exist)
-// Use absolute paths to ensure they load regardless of where the process is started
-dotenv.config({ path: join(rootDir, '.env.local') });
-dotenv.config({ path: join(rootDir, '.env') });
+// Load environment variables from backend/.env.local and backend/.env
+// Each workspace has its own environment configuration
+dotenv.config({ path: join(backendDir, '.env.local') });
+dotenv.config({ path: join(backendDir, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3001;

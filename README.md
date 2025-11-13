@@ -115,25 +115,43 @@ You can update these values in [`app-config.ts`](./app-config.ts) to customize b
 
 #### Environment Variables
 
-You'll also need to configure your LiveKit credentials in `.env` (copy `.env.example` if you don't have one):
+Each workspace has its own environment configuration:
+
+**Backend** (`backend/.env.local`):
+```bash
+# Copy backend/.env.example to backend/.env.local
+cd backend
+cp .env.example .env.local
+```
 
 ```env
-# Backend environment variables (server-side only)
+# LiveKit server configuration (REQUIRED)
 LIVEKIT_API_KEY=your_livekit_api_key
 LIVEKIT_API_SECRET=your_livekit_api_secret
-LIVEKIT_URL=wss://your-livekit-server-url
+LIVEKIT_URL=wss://your-project.livekit.cloud
 PORT=3001
+```
 
-# Frontend environment variables (exposed to client, must be prefixed with VITE_)
-VITE_MAPBOX_ACCESS_TOKEN=your_mapbox_token  # if using Mapbox features
+**Frontend** (`frontend/.env.local`):
+```bash
+# Copy frontend/.env.example to frontend/.env.local
+cd frontend
+cp .env.example .env.local
+```
+
+```env
+# Backend API endpoint (OPTIONAL - defaults to /api/connection-details for local dev)
+VITE_CONN_DETAILS_ENDPOINT=https://your-backend.vercel.app/api/connection-details
+
+# Mapbox access token (OPTIONAL - only if using Mapbox features)
+VITE_MAPBOX_ACCESS_TOKEN=your_mapbox_token
 ```
 
 **Important Notes:**
-- Backend variables (LIVEKIT_API_KEY, LIVEKIT_API_SECRET) are kept server-side for security
-- Frontend variables must be prefixed with `VITE_` to be accessible in the client
-- The Express backend handles token generation securely via `/api/connection-details`
-
-These are required for the voice agent functionality to work with your LiveKit project.
+- ✅ **Each workspace has its own `.env` file** - matches how deployment platforms work
+- ✅ Backend variables are **never exposed** to the client
+- ✅ Frontend variables **must be prefixed with `VITE_`** to be accessible
+- ✅ The Express backend handles token generation securely via `/api/connection-details`
 
 ### Available Scripts
 
