@@ -154,6 +154,43 @@ From the root directory:
 
 The frontend and backend can be deployed separately as they are independent services.
 
+### Deploying to Vercel (Recommended)
+
+Both frontend and backend can be deployed on Vercel as separate projects.
+
+#### Backend Deployment on Vercel
+
+1. Create a new **Vercel project** for the backend
+2. Connect your repository
+3. Configure the service:
+   - **Root Directory**: `backend`
+   - **Framework Preset**: Other
+   - **Build Command**: `npm install && npm run build`
+   - **Output Directory**: (leave empty)
+4. Add environment variables:
+   - `LIVEKIT_API_KEY`
+   - `LIVEKIT_API_SECRET`
+   - `LIVEKIT_URL`
+5. Deploy the service and note the backend URL (e.g., `https://your-backend.vercel.app`)
+
+The backend includes a `vercel.json` configuration file that tells Vercel how to run the Express API.
+
+#### Frontend Deployment on Vercel
+
+1. Create a new **Vercel project** for the frontend
+2. Connect your repository (same repo, different project)
+3. Configure the service:
+   - **Root Directory**: `frontend`
+   - **Framework Preset**: Vite
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+4. Add environment variables:
+   - `VITE_CONN_DETAILS_ENDPOINT` - Full URL to your backend (e.g., `https://your-backend.vercel.app/api/connection-details`)
+   - `VITE_MAPBOX_ACCESS_TOKEN` - If using Mapbox features
+5. Deploy the static site
+
+**Note:** Create two separate Vercel projects from the same repository, just use different root directories.
+
 ### Deploying to Render
 
 #### Backend Deployment
