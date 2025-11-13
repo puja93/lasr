@@ -1,7 +1,12 @@
 import express from 'express';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import { AccessToken, type AccessTokenOptions, type VideoGrant } from 'livekit-server-sdk';
 import { RoomConfiguration } from '@livekit/protocol';
+
+// Load environment variables from .env.local (or .env if .env.local doesn't exist)
+dotenv.config({ path: '.env.local' });
+dotenv.config(); // Fallback to .env if .env.local doesn't exist
 
 const app = express();
 const PORT = process.env.PORT || 3001;
