@@ -9,14 +9,15 @@ import { Toaster } from '@/components/livekit/toaster';
 
 interface AppProps {
   appConfig: AppConfig;
+  mapboxToken: string;
 }
 
-export function App({ appConfig }: AppProps) {
+export function App({ appConfig, mapboxToken }: AppProps) {
   return (
     <SessionProvider appConfig={appConfig}>
       {/* Mapbox Map Background */}
       <div className="fixed inset-0 z-0">
-        <MapboxMap className="h-full w-full" />
+        <MapboxMap className="h-full w-full" mapboxToken={mapboxToken} />
       </div>
 
       {/* Main Content Overlay */}

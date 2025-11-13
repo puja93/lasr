@@ -1,22 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Map from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface MapboxMapProps {
   className?: string;
+  mapboxToken: string;
 }
 
-export function MapboxMap({ className }: MapboxMapProps) {
-  const [mapboxToken, setMapboxToken] = useState<string>('');
-
-  useEffect(() => {
-    // Get the Mapbox token from environment variable
-    const token = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || '';
-    setMapboxToken(token);
-  }, []);
-
+export function MapboxMap({ className, mapboxToken }: MapboxMapProps) {
   if (!mapboxToken) {
     return (
       <div className={className}>
