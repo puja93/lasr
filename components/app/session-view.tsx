@@ -4,12 +4,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import type { AppConfig } from '@/app-config';
 import { ChatTranscript } from '@/components/app/chat-transcript';
+import { CompactControlBar, type ControlBarControls } from '@/components/app/compact-control-bar';
 import { PreConnectMessage } from '@/components/app/preconnect-message';
-import { TileLayout } from '@/components/app/tile-layout';
-import {
-  AgentControlBar,
-  type ControlBarControls,
-} from '@/components/livekit/agent-control-bar/agent-control-bar';
 import { useChatMessages } from '@/hooks/useChatMessages';
 import { useConnectionTimeout } from '@/hooks/useConnectionTimout';
 import { useDebugMode } from '@/hooks/useDebug';
@@ -91,12 +87,13 @@ export const SessionView = ({
   }, [messages]);
 
   return (
-    <section className="bg-background relative z-10 h-full w-full overflow-hidden" {...props}>
+    <section className="pointer-events-none relative z-10 h-full w-full overflow-hidden" {...props}>
       {/* Chat Transcript */}
       <div
         className={cn(
           'fixed inset-0 grid grid-cols-1 grid-rows-1',
-          !chatOpen && 'pointer-events-none'
+          !chatOpen && 'pointer-events-none',
+          chatOpen && 'pointer-events-auto'
         )}
       >
         <Fade top className="absolute inset-x-4 top-0 h-40" />
@@ -109,21 +106,15 @@ export const SessionView = ({
         </ScrollArea>
       </div>
 
-      {/* Tile Layout */}
-      <TileLayout chatOpen={chatOpen} />
-
-      {/* Bottom */}
+      {/* Compact Control Bar at Bottom */}
       <MotionBottom
         {...BOTTOM_VIEW_MOTION_PROPS}
-        className="fixed inset-x-3 bottom-0 z-50 md:inset-x-12"
+        className="pointer-events-auto fixed inset-x-0 bottom-0 z-50 flex items-center justify-center pb-8"
       >
         {appConfig.isPreConnectBufferEnabled && (
           <PreConnectMessage messages={messages} className="pb-4" />
         )}
-        <div className="bg-background relative mx-auto max-w-2xl pb-3 md:pb-12">
-          <Fade bottom className="absolute inset-x-0 top-0 h-4 -translate-y-full" />
-          <AgentControlBar controls={controls} onChatOpenChange={setChatOpen} />
-        </div>
+        <CompactControlBar controls={controls} onChatOpenChange={setChatOpen} />
       </MotionBottom>
     </section>
   );
