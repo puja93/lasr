@@ -23,6 +23,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "livekit-client": "^2.15.8",
+    "mapbox-gl": "^3.16.0",
     "mime": "^4.0.7",
     "motion": "^12.16.0",
     "react": "^19.0.0",

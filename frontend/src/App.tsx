@@ -3,6 +3,7 @@ import { RoomAudioRenderer, StartAudio } from '@livekit/components-react';
 import { APP_CONFIG_DEFAULTS, type AppConfig } from '@/app-config';
 import { SessionProvider } from '@/components/app/session-provider';
 import { ViewController } from '@/components/app/view-controller';
+import { MapBackground } from '@/components/app/map-background';
 import { ThemeToggle } from '@/components/app/theme-toggle';
 import { Toaster } from '@/components/livekit/toaster';
 import { getStyles } from '@/lib/utils';
@@ -29,9 +30,14 @@ function App() {
 
   return (
     <SessionProvider appConfig={appConfig}>
-      <main className="grid h-svh grid-cols-1 place-content-center">
+      {/* Full-screen Mapbox background */}
+      <MapBackground />
+
+      {/* Main content layer (overlays the map) */}
+      <main className="relative z-10 h-svh w-full">
         <ViewController />
       </main>
+
       <StartAudio label="Start Audio" />
       <RoomAudioRenderer />
       <Toaster />
