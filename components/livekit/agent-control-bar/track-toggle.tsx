@@ -1,4 +1,3 @@
-'use client';
 
 import * as React from 'react';
 import { Track } from 'livekit-client';
@@ -10,7 +9,7 @@ import {
   SpinnerIcon,
   VideoCameraIcon,
   VideoCameraSlashIcon,
-} from '@phosphor-icons/react/dist/ssr';
+} from '@phosphor-icons/react';
 import { Toggle } from '@/components/livekit/toggle';
 import { cn } from '@/lib/utils';
 

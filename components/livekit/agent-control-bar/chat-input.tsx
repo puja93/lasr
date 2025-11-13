@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
-import { PaperPlaneRightIcon, SpinnerIcon } from '@phosphor-icons/react/dist/ssr';
+import { PaperPlaneRightIcon, SpinnerIcon } from '@phosphor-icons/react';
 import { Button } from '@/components/livekit/button';
 
 const MOTION_PROPS = {

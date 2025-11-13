@@ -21,28 +21,29 @@ Also available for:
 - Light/dark theme switching with system preference detection
 - Customizable branding, colors, and UI text via configuration
 
-This template is built with Next.js and is free for you to use or modify as you see fit.
+This template is built with Vite + React and is free for you to use or modify as you see fit.
 
 ### Project structure
 
 ```
 agent-starter-react/
-├── app/
-│   ├── (app)/
-│   ├── api/
-│   ├── components/
-│   ├── fonts/
-│   ├── globals.css
-│   └── layout.tsx
+├── src/
+│   ├── styles/
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── vite-env.d.ts
 ├── components/
 │   ├── livekit/
-│   ├── ui/
-│   ├── app.tsx
-│   ├── session-view.tsx
-│   └── welcome.tsx
+│   ├── app/
+│   │   ├── app.tsx
+│   │   ├── session-view.tsx
+│   │   └── welcome.tsx
+├── server/
+│   └── index.ts        # Express backend for API routes
 ├── hooks/
 ├── lib/
 ├── public/
+├── vite.config.ts
 └── package.json
 ```
 
@@ -62,11 +63,11 @@ lk app create --template agent-starter-react
 Then run the app with:
 
 ```bash
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
-And open http://localhost:3000 in your browser.
+This will start both the Vite development server (frontend on http://localhost:3000) and the Express backend (API on http://localhost:3001).
 
 You'll also need an agent to speak with. Try our starter agent for [Python](https://github.com/livekit-examples/agent-starter-python), [Node.js](https://github.com/livekit-examples/agent-starter-node), or [create your own from scratch](https://docs.livekit.io/agents/start/voice-ai/).
 
@@ -107,15 +108,37 @@ You can update these values in [`app-config.ts`](./app-config.ts) to customize b
 
 #### Environment Variables
 
-You'll also need to configure your LiveKit credentials in `.env.local` (copy `.env.example` if you don't have one):
+You'll also need to configure your LiveKit credentials in `.env` (copy `.env.example` if you don't have one):
 
 ```env
+# Backend environment variables (server-side only)
 LIVEKIT_API_KEY=your_livekit_api_key
 LIVEKIT_API_SECRET=your_livekit_api_secret
-LIVEKIT_URL=https://your-livekit-server-url
+LIVEKIT_URL=wss://your-livekit-server-url
+PORT=3001
+
+# Frontend environment variables (exposed to client, must be prefixed with VITE_)
+VITE_MAPBOX_ACCESS_TOKEN=your_mapbox_token  # if using Mapbox features
 ```
 
+**Important Notes:**
+- Backend variables (LIVEKIT_API_KEY, LIVEKIT_API_SECRET) are kept server-side for security
+- Frontend variables must be prefixed with `VITE_` to be accessible in the client
+- The Express backend handles token generation securely via `/api/connection-details`
+
 These are required for the voice agent functionality to work with your LiveKit project.
+
+### Available Scripts
+
+- `npm run dev` - Start both frontend (Vite) and backend (Express) in development mode
+- `npm run dev:client` - Start only the Vite development server
+- `npm run dev:server` - Start only the Express backend server
+- `npm run build` - Build the frontend for production
+- `npm run build:server` - Build the backend for production
+- `npm run start` - Start both frontend and backend in production mode
+- `npm run type-check` - Run TypeScript type checking
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
 
 ## Contributing
 

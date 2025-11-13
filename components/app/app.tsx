@@ -1,4 +1,3 @@
-'use client';
 
 import { RoomAudioRenderer, StartAudio } from '@livekit/components-react';
 import type { AppConfig } from '@/app-config';

@@ -1,8 +1,6 @@
-'use client';
-
-import { useTheme } from 'next-themes';
+import { useTheme } from '@/hooks/useTheme';
 import { Toaster as Sonner, ToasterProps } from 'sonner';
-import { WarningIcon } from '@phosphor-icons/react/dist/ssr';
+import { WarningIcon } from '@phosphor-icons/react';
 
 export function Toaster({ ...props }: ToasterProps) {
   const { theme = 'system' } = useTheme();

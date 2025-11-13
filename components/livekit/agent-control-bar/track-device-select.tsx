@@ -1,4 +1,3 @@
-'use client';
 
 import { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { cva } from 'class-variance-authority';

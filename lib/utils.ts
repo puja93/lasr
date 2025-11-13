@@ -1,11 +1,10 @@
-import { cache } from 'react';
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { APP_CONFIG_DEFAULTS } from '@/app-config';
 import type { AppConfig } from '@/app-config';
 
-export const CONFIG_ENDPOINT = process.env.NEXT_PUBLIC_APP_CONFIG_ENDPOINT;
-export const SANDBOX_ID = process.env.SANDBOX_ID;
+export const CONFIG_ENDPOINT = import.meta.env.VITE_APP_CONFIG_ENDPOINT;
+export const SANDBOX_ID = import.meta.env.VITE_SANDBOX_ID;
 
 export const THEME_STORAGE_KEY = 'theme-mode';
 export const THEME_MEDIA_QUERY = '(prefers-color-scheme: dark)';
@@ -22,11 +21,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// https://react.dev/reference/react/cache#caveats
-// > React will invalidate the cache for all memoized functions for each server request.
-export const getAppConfig = cache(async (headers: Headers): Promise<AppConfig> => {
+// Fetch app config from remote endpoint if configured
+export async function getAppConfig(): Promise<AppConfig> {
   if (CONFIG_ENDPOINT) {
-    const sandboxId = SANDBOX_ID ?? headers.get('x-sandbox-id') ?? '';
+    const sandboxId = SANDBOX_ID ?? '';
 
     try {
       if (!sandboxId) {
@@ -70,7 +68,7 @@ export const getAppConfig = cache(async (headers: Headers): Promise<AppConfig> =
   }
 
   return APP_CONFIG_DEFAULTS;
-});
+}
 
 // check provided accent colors against defaults
 // apply styles if they differ (or in development mode)
