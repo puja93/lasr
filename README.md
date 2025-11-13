@@ -25,26 +25,33 @@ This template is built with Vite + React and is free for you to use or modify as
 
 ### Project structure
 
+This is a monorepo with separate frontend and backend workspaces:
+
 ```
 agent-starter-react/
-├── src/
-│   ├── styles/
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── vite-env.d.ts
-├── components/
-│   ├── livekit/
-│   ├── app/
-│   │   ├── app.tsx
-│   │   ├── session-view.tsx
-│   │   └── welcome.tsx
-├── server/
-│   └── index.ts        # Express backend for API routes
-├── hooks/
-├── lib/
-├── public/
-├── vite.config.ts
-└── package.json
+├── frontend/               # Vite + React application
+│   ├── src/
+│   │   ├── styles/
+│   │   ├── App.tsx
+│   │   ├── main.tsx
+│   │   └── vite-env.d.ts
+│   ├── components/
+│   │   ├── livekit/
+│   │   └── app/
+│   ├── hooks/
+│   ├── lib/
+│   ├── public/
+│   ├── vite.config.ts
+│   ├── tsconfig.json
+│   └── package.json
+├── backend/                # Express API server
+│   ├── src/
+│   │   └── index.ts       # Token generation endpoint
+│   ├── tsconfig.json
+│   └── package.json
+├── .env.local             # Your LiveKit credentials (gitignored)
+├── .env.example           # Template for environment variables
+└── package.json           # Root workspace configuration
 ```
 
 ## Getting started
@@ -130,15 +137,60 @@ These are required for the voice agent functionality to work with your LiveKit p
 
 ### Available Scripts
 
+From the root directory:
+
 - `npm run dev` - Start both frontend (Vite) and backend (Express) in development mode
-- `npm run dev:client` - Start only the Vite development server
-- `npm run dev:server` - Start only the Express backend server
-- `npm run build` - Build the frontend for production
-- `npm run build:server` - Build the backend for production
+- `npm run dev:frontend` - Start only the Vite development server (http://localhost:3000)
+- `npm run dev:backend` - Start only the Express backend server (http://localhost:3001)
+- `npm run build` - Build both frontend and backend for production
+- `npm run build:frontend` - Build only the frontend
+- `npm run build:backend` - Build only the backend
 - `npm run start` - Start both frontend and backend in production mode
-- `npm run type-check` - Run TypeScript type checking
-- `npm run lint` - Run ESLint
+- `npm run lint` - Run ESLint on frontend
 - `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
+
+## Deployment
+
+The frontend and backend can be deployed separately as they are independent services.
+
+### Deploying to Render
+
+#### Backend Deployment
+
+1. Create a new **Web Service** on Render
+2. Connect your repository
+3. Configure the service:
+   - **Root Directory**: `backend`
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm start`
+   - **Environment**: Node
+4. Add environment variables:
+   - `LIVEKIT_API_KEY`
+   - `LIVEKIT_API_SECRET`
+   - `LIVEKIT_URL`
+   - `PORT` (optional, defaults to 3001)
+5. Deploy the service and note the backend URL (e.g., `https://your-backend.onrender.com`)
+
+#### Frontend Deployment
+
+1. Create a new **Static Site** on Render
+2. Connect your repository
+3. Configure the service:
+   - **Root Directory**: `frontend`
+   - **Build Command**: `npm install && npm run build`
+   - **Publish Directory**: `frontend/dist`
+4. Add environment variables (optional):
+   - `VITE_CONN_DETAILS_ENDPOINT` - Full URL to your backend API endpoint (e.g., `https://your-backend.onrender.com/api/connection-details`)
+   - `VITE_MAPBOX_ACCESS_TOKEN` - If using Mapbox features
+5. Deploy the static site
+
+**Note:** If you don't set `VITE_CONN_DETAILS_ENDPOINT`, the frontend will default to `/api/connection-details`, which works for local development but needs to be updated for separate deployments.
+
+### Other Deployment Options
+
+- **Frontend**: Can be deployed to any static hosting service (Vercel, Netlify, AWS S3 + CloudFront, etc.)
+- **Backend**: Can be deployed to any Node.js hosting service (Heroku, Railway, AWS ECS, Google Cloud Run, etc.)
 
 ## Contributing
 
