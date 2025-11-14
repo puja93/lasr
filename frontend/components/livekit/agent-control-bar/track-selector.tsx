@@ -1,4 +1,3 @@
-
 import {
   BarVisualizer,
   type TrackReferenceOrPlaceholder,

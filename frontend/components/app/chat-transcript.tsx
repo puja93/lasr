@@ -1,4 +1,3 @@
-
 import { AnimatePresence, type HTMLMotionProps, motion } from 'motion/react';
 import { type ReceivedChatMessage } from '@livekit/components-react';
 import { ChatEntry } from '@/components/livekit/chat-entry';

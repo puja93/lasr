@@ -42,7 +42,7 @@ export function MapBackground() {
   return (
     <div
       ref={mapContainer}
-      className="fixed inset-0 w-full h-full z-0"
+      className="fixed inset-0 z-0 h-full w-full"
       style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%' }}
     />
   );

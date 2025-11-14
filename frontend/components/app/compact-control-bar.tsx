@@ -1,15 +1,17 @@
+import { useCallback } from 'react';
 import { Track } from 'livekit-client';
+import { BarVisualizer, useLocalParticipant, useVoiceAssistant } from '@livekit/components-react';
 import {
-  BarVisualizer,
-  useLocalParticipant,
-  useVoiceAssistant,
-} from '@livekit/components-react';
-import { MicrophoneSlash, Microphone, PhoneDisconnect, VideoCamera, VideoCameraSlash } from '@phosphor-icons/react';
+  Microphone,
+  MicrophoneSlash,
+  PhoneDisconnect,
+  VideoCamera,
+  VideoCameraSlash,
+} from '@phosphor-icons/react';
 import { useSession } from '@/components/app/session-provider';
 import { Button } from '@/components/livekit/button';
 import { Toggle } from '@/components/livekit/toggle';
 import { cn } from '@/lib/utils';
-import { useCallback } from 'react';
 
 interface CompactControlBarProps {
   className?: string;
@@ -42,8 +44,8 @@ export function CompactControlBar({ className }: CompactControlBarProps) {
     <div
       className={cn(
         'fixed bottom-8 left-1/2 z-20 -translate-x-1/2',
-        'flex items-center gap-2 px-4 py-3 rounded-full',
-        'bg-background/90 backdrop-blur-md border border-input/50',
+        'flex items-center gap-2 rounded-full px-4 py-3',
+        'bg-background/90 border-input/50 border backdrop-blur-md',
         'shadow-2xl',
         className
       )}
@@ -65,7 +67,7 @@ export function CompactControlBar({ className }: CompactControlBarProps) {
       </Toggle>
 
       {/* Waveform Visualizer */}
-      <div className="flex items-center gap-1 px-4 min-w-[120px] md:min-w-[200px]">
+      <div className="flex min-w-[120px] items-center gap-1 px-4 md:min-w-[200px]">
         <BarVisualizer
           barCount={7}
           state={agentState}

@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import { Track } from 'livekit-client';
 import { useTrackToggle } from '@livekit/components-react';

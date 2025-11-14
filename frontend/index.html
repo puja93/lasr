@@ -8,12 +8,12 @@
     <title>LiveKit Voice Agent</title>
     <script>
       const doc = document.documentElement;
-      const theme = localStorage.getItem("theme-mode") ?? "system";
-      if (theme === "system") {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          doc.classList.add("dark");
+      const theme = localStorage.getItem('theme-mode') ?? 'system';
+      if (theme === 'system') {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          doc.classList.add('dark');
         } else {
-          doc.classList.add("light");
+          doc.classList.add('light');
         }
       } else {
         doc.classList.add(theme);

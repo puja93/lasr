@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { AppConfig } from '@/app-config';
 import { CompactControlBar } from '@/components/app/compact-control-bar';
@@ -12,7 +11,7 @@ interface SessionViewProps {
 }
 
 export const SessionView = ({
-  appConfig,
+  appConfig: _appConfig,
   ...props
 }: React.ComponentProps<'section'> & SessionViewProps) => {
   useConnectionTimeout(200_000);
