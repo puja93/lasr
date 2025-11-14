@@ -13,12 +13,15 @@
 # testing
 /coverage
 
-# next.js
+# next.js (legacy)
 /.next/
 /out/
 
 # production
 /build
+/dist
+frontend/dist
+backend/dist
 
 # misc
 .DS_Store
@@ -33,6 +36,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 !.env.example
+backend/.env*
+!backend/.env.example
+frontend/.env*
+!frontend/.env.example
 
 # vercel
 .vercel
@@ -40,3 +47,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# vite
+dist-ssr
+*.local

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth font-sans antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A voice agent built with LiveKit" />
+    <title>LiveKit Voice Agent</title>
+    <script>
+      const doc = document.documentElement;
+      const theme = localStorage.getItem("theme-mode") ?? "system";
+      if (theme === "system") {
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          doc.classList.add("dark");
+        } else {
+          doc.classList.add("light");
+        }
+      } else {
+        doc.classList.add(theme);
+      }
+    </script>
+  </head>
+  <body class="overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
