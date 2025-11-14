@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { THEME_STORAGE_KEY, THEME_MEDIA_QUERY } from '@/lib/utils';
+import { useEffect, useState } from 'react';
+import { THEME_MEDIA_QUERY, THEME_STORAGE_KEY } from '@/lib/utils';
 
 type ThemeMode = 'dark' | 'light' | 'system';
 

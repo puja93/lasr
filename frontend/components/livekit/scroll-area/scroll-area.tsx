@@ -1,4 +1,3 @@
-
 import { forwardRef, useCallback, useRef } from 'react';
 import { useAutoScroll } from '@/components/livekit/scroll-area/hooks/useAutoScroll';
 import { cn } from '@/lib/utils';

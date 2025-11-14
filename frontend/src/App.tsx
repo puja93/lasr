@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { RoomAudioRenderer, StartAudio } from '@livekit/components-react';
 import { APP_CONFIG_DEFAULTS, type AppConfig } from '@/app-config';
-import { SessionProvider } from '@/components/app/session-provider';
-import { ViewController } from '@/components/app/view-controller';
 import { MapBackground } from '@/components/app/map-background';
+import { SessionProvider } from '@/components/app/session-provider';
 import { ThemeToggle } from '@/components/app/theme-toggle';
+import { ViewController } from '@/components/app/view-controller';
 import { Toaster } from '@/components/livekit/toaster';
 import { getStyles } from '@/lib/utils';
 

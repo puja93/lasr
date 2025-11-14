@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useMemo } from 'react';
 import { RoomContext } from '@livekit/components-react';
 import { APP_CONFIG_DEFAULTS, type AppConfig } from '@/app-config';
